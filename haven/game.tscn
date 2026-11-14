@@ -28,7 +28,6 @@ light_energy = 1.5
 shadow_enabled = true
 
 [node name="Spawner" type="Node3D" parent="." unique_id=923238417]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25645518, 0.5509405, -0.49946117)
 script = ExtResource("1_feb5d")
 duck_scene = ExtResource("2_e2o6t")
 duck_accel = 0.005
