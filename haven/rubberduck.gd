@@ -3,6 +3,8 @@ extends RigidBody3D
 var duck_value = 5
 @onready var camera = $Camera3D
 @onready var hud = get_tree().current_scene.get_node("HUD")
+
+var abletohit:= true
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var random_rotation = Vector3(randf_range(-0.5, 0.5), randf_range(-1.5, 1.5), 0.0)
@@ -18,7 +20,8 @@ func _process(delta: float) -> void:
 
 func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 		
-	if event.is_action_pressed("Shoot"):
+	if event.is_action_pressed("Shoot") and abletohit:
+		abletohit = false
 		var ran_spin = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)).normalized()
 		apply_torque_impulse(ran_spin * 15.0)
 		
