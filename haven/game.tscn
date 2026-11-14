@@ -1,18 +1,37 @@
 [gd_scene format=3 uid="uid://crwqxmtc4hsks"]
 
-[ext_resource type="PackedScene" uid="uid://dsb0y1rnv7bhh" path="res://assets/models/RubberDuck.glb" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://du2dhcl48wod5" path="res://DuckSpawner.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://boqvoafdo7vae" path="res://rubber_duck.tscn" id="2_e2o6t"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_uuvgp"]
-margin = 0.0
-radius = 0.37
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
+sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
+sky_horizon_color = Color(0.5656549, 0.62510514, 0.6775485, 1)
+ground_bottom_color = Color(0.24637347, 0.15100378, 0.031082815, 1)
+ground_horizon_color = Color(0.5656549, 0.62510514, 0.6775485, 1)
+
+[sub_resource type="Sky" id="Sky_feb5d"]
+sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
+
+[sub_resource type="Environment" id="Environment_fc0e3"]
+background_mode = 2
+sky = SubResource("Sky_feb5d")
 
 [node name="Node3D" type="Node3D" unique_id=220923442]
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=816639097]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1821137143]
+environment = SubResource("Environment_fc0e3")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=835676724]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_color = Color(0.9882353, 0.6431373, 0.050980393, 1)
+light_energy = 1.5
+shadow_enabled = true
+
+[node name="Spawner" type="Node3D" parent="." unique_id=923238417]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25645518, 0.5509405, -0.49946117)
+script = ExtResource("1_feb5d")
+duck_scene = ExtResource("2_e2o6t")
+duck_accel = 0.005
 
-[node name="RubberDuck" parent="RigidBody3D" unique_id=149477437 instance=ExtResource("1_80nbo")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1976212669]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05070305, 0.1249502, 0)
-shape = SubResource("SphereShape3D_uuvgp")
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.4640007)
