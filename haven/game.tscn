@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://crwqxmtc4hsks"]
 
+[ext_resource type="Script" uid="uid://dp5fm3a5e2w6q" path="res://GameManager.gd" id="1_eow3j"]
 [ext_resource type="Script" uid="uid://du2dhcl48wod5" path="res://DuckSpawner.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://boqvoafdo7vae" path="res://rubber_duck.tscn" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://cl1amh4jlsrij" path="res://camera.gd" id="3_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://bywk1p2nshxrp" path="res://assets/models/Crosshair.glb" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://fcjltld84i7d" path="res://Crosshair.gd" id="5_7jktm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
@@ -16,7 +20,8 @@ sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
 background_mode = 2
 sky = SubResource("Sky_feb5d")
 
-[node name="Node3D" type="Node3D" unique_id=220923442]
+[node name="GameManager" type="Node3D" unique_id=220923442]
+script = ExtResource("1_eow3j")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1821137143]
 environment = SubResource("Environment_fc0e3")
@@ -32,5 +37,11 @@ script = ExtResource("1_feb5d")
 duck_scene = ExtResource("2_e2o6t")
 duck_accel = 0.005
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648 node_paths=PackedStringArray("crosshair")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.4640007)
+script = ExtResource("3_fc0e3")
+crosshair = NodePath("../Crosshair")
+
+[node name="Crosshair" parent="." unique_id=145224318 instance=ExtResource("3_feb5d")]
+transform = Transform3D(3.8636622e-10, 0, -0.032400005, 0, 0.032400005, 0, 0.032400005, 0, 3.8636622e-10, 0, 0, 3.9)
+script = ExtResource("5_7jktm")
