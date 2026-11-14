@@ -1,3 +1,18 @@
 [gd_scene format=3 uid="uid://crwqxmtc4hsks"]
 
+[ext_resource type="PackedScene" uid="uid://dsb0y1rnv7bhh" path="res://assets/models/RubberDuck.glb" id="1_80nbo"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uuvgp"]
+margin = 0.0
+radius = 0.37
+
 [node name="Node3D" type="Node3D" unique_id=220923442]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=816639097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25645518, 0.5509405, -0.49946117)
+
+[node name="RubberDuck" parent="RigidBody3D" unique_id=149477437 instance=ExtResource("1_80nbo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1976212669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05070305, 0.1249502, 0)
+shape = SubResource("SphereShape3D_uuvgp")
