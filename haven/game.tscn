@@ -21,7 +21,7 @@
 [ext_resource type="Script" uid="uid://dpkdn7vnuv0p4" path="res://timer.gd" id="14_215e1"]
 [ext_resource type="PackedScene" uid="uid://dsb0y1rnv7bhh" path="res://assets/models/RubberDuck.glb" id="16_80cx4"]
 [ext_resource type="AudioStream" uid="uid://rdde0sacoa88" path="res://assets/audio/shot.mp3" id="20_e36ub"]
-[ext_resource type="AudioStream" uid="uid://cmgpi0q1dpwr5" path="res://assets/audio/music.wav" id="22_x5p1p"]
+[ext_resource type="AudioStream" uid="uid://mxq1y638vkev" path="res://assets/audio/newmusic.wav" id="22_x5p1p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
