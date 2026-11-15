@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://djr7ij7616hgr" path="res://game.gdshader" id="5_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://cki312tkj55jj" path="res://hud.tscn" id="7_eow3j"]
 [ext_resource type="Shader" uid="uid://0p6o8010dbv6" path="res://toon_water.gdshader" id="8_vef74"]
+[ext_resource type="PackedScene" uid="uid://mmwqyddpoaxr" path="res://assets/models/BathTub.glb" id="10_hve3p"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uuvgp"]
 render_priority = 1
@@ -81,7 +82,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 mesh = SubResource("PlaneMesh_hve3p")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648 node_paths=PackedStringArray("crosshair")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32004523, 5.4640007)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 5.464)
 script = ExtResource("3_fc0e3")
 crosshair = NodePath("../Crosshair")
 
@@ -112,3 +113,6 @@ transform = Transform3D(3.8636622e-10, 0, -0.032400005, 0, 0.032400005, 0, 0.032
 script = ExtResource("5_7jktm")
 
 [node name="HUD" parent="." unique_id=1120462307 instance=ExtResource("7_eow3j")]
+
+[node name="BathTub" parent="." unique_id=616188069 instance=ExtResource("10_hve3p")]
+transform = Transform3D(-8.847186e-08, 0, -2.0240002, 0, 2.0240002, 0, 2.0240002, 0, -8.847186e-08, 0, -1, -1)

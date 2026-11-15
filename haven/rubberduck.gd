@@ -8,7 +8,7 @@ var abletohit:= true
 func _ready() -> void:
 	var random_rotation = Vector3(0.0, randf_range(-0.5, 0.5), 0.0)
 	apply_torque_impulse(random_rotation)
-	var random_force = Vector3(randf_range(-5.0, 5.0), randf_range(10.0, 14.0), 0.0)
+	var random_force = Vector3(randf_range(-5.0, 5.0), randf_range(9.5, 12.0), 0.0)
 	apply_central_impulse(random_force)
 
 

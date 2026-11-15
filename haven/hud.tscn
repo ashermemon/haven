@@ -6,11 +6,17 @@
 [node name="HUD" type="CanvasLayer" unique_id=1120462307]
 script = ExtResource("1_64ctp")
 
-[node name="ScoreLabel" type="RichTextLabel" parent="." unique_id=1974133276]
-offset_right = 309.0
-offset_bottom = 127.0
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=483600368]
+offset_right = 1749.0
+offset_bottom = 995.0
+mouse_filter = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+
+[node name="ScoreLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1974133276]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
 theme_override_fonts/normal_font = ExtResource("1_37p78")
-theme_override_font_sizes/normal_font_size = 70
+theme_override_font_sizes/normal_font_size = 90
 text = "Score: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
