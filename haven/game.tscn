@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://cl1amh4jlsrij" path="res://camera.gd" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bywk1p2nshxrp" path="res://assets/models/Crosshair.glb" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://fcjltld84i7d" path="res://Crosshair.gd" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://canafsdiselxp" path="res://assets/models/GoldDuck.glb" id="6_iotsf"]
 [ext_resource type="PackedScene" uid="uid://cki312tkj55jj" path="res://hud.tscn" id="7_eow3j"]
+[ext_resource type="PackedScene" uid="uid://djl225fwx11ux" path="res://assets/models/SilverDuck.glb" id="7_lc2xo"]
 [ext_resource type="Shader" uid="uid://0p6o8010dbv6" path="res://toon_water.gdshader" id="8_vef74"]
 [ext_resource type="PackedScene" uid="uid://mmwqyddpoaxr" path="res://assets/models/BathTub.glb" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://cfjkec8pwl3qu" path="res://water_controller.gd" id="10_mfdv2"]
@@ -144,6 +146,8 @@ directional_shadow_max_distance = 50.0
 [node name="Spawner" type="Node3D" parent="." unique_id=923238417]
 script = ExtResource("1_feb5d")
 duck_scene = ExtResource("2_e2o6t")
+gold_glb = ExtResource("6_iotsf")
+silver_glb = ExtResource("7_lc2xo")
 duck_freq = 0.5
 duck_accel = 0.005
 max_freq = 26.0
