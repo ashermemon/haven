@@ -7,8 +7,14 @@ var abletohit:= true
 var is_dynamite = false
 
 var water_controller: Node
+var spawner
 
 func _ready() -> void:
+	var timer_label = get_tree().current_scene.find_child("Timer", true, false)
+	timer_label.timer_finished.connect(_on_timer_finished)
+	
+	spawner = get_tree().current_scene.get_node("Spawner")
+
 	water_controller = get_tree().current_scene.get_node("WaterController")
 	print("WATER CONTROLLER: ", water_controller)
 	var water_area = get_tree().get_first_node_in_group("water")
@@ -22,6 +28,9 @@ func _ready() -> void:
 	var random_force = Vector3(randf_range(-5.0, 5.0), randf_range(9.5, 12.0), 0.0)
 	apply_central_impulse(random_force)
 
+func _on_timer_finished() -> void:
+	spawner.stop_spawning()
+	explode()
 
 func _on_water_entered(body: Node3D) -> void:
 	if body != self:
@@ -70,6 +79,7 @@ func debris() -> void:
 	mat.emission = Color.ORANGE_RED
 	mat.emission_energy_multiplier = 2.0
 	mesh.material = mat
+	mat.render_priority = 100
 	particles.draw_pass_1 = mesh
 
 	var p_mat := ParticleProcessMaterial.new()
@@ -109,6 +119,7 @@ func fire() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.render_priority = 100 
 	#mat.albedo_color = Color.DARK_ORANGE
 	#mat.emission_enabled = true
 	#mat.emission = Color.ORANGE_RED
@@ -162,7 +173,7 @@ func fire() -> void:
 
 func smoke() -> void:
 	var particles := GPUParticles3D.new()
-	particles.one_shot = false
+	particles.one_shot = true
 	particles.amount = 12
 	particles.lifetime = 2
 	particles.explosiveness = 1.0
@@ -177,6 +188,7 @@ func smoke() -> void:
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.render_priority = 100
 	#mat.albedo_color = Color.DARK_ORANGE
 	#mat.emission_enabled = true
 	#mat.emission = Color.ORANGE_RED
@@ -221,9 +233,30 @@ func smoke() -> void:
 	particles.emitting = true
 
 func explode():
+	if abletohit:
+		abletohit = false
+	else:
+		return
+		
+	freeze = true
+	
+	for child in get_children():
+		if child is CollisionShape3D:
+			child.set_deferred("disabled", true)
+			
+
+	var model = get_node("Model")
+	model.hide()
+
+	
+	
 	debris()
 	fire()
 	smoke()
+	
+
+	await get_tree().create_timer(3).timeout
+	queue_free()
 	pass
 
 

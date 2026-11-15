@@ -220,7 +220,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4633217, 0)
 shape = SubResource("BoxShape3D_uuvgp")
 
-[node name="Label3D" type="Label3D" parent="." unique_id=1085393033]
+[node name="Timer" type="Label3D" parent="." unique_id=1085393033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4337654, -13.60476)
 billboard = 2
 modulate = Color(0.8562564, 0.8950538, 0.98973197, 1)
