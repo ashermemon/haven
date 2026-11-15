@@ -36,40 +36,45 @@ func _process(delta: float) -> void:
 			spawn_position = Vector3(randf_range(-5.0, 5.0), -5.0, randf_range(-0.5, 0.5))
 			
 			time_since_spawn -= spawn_interval
-			spawn_duck(spawn_position, random_force)
+			var rand = randf()
+			
+			if rand < 0.22:
+				spawn_duck(spawn_position, random_force, "dynamite")
+			elif rand < 0.37:	
+				spawn_duck(spawn_position, random_force, "silver")
+			elif rand < 0.45:
+				spawn_duck(spawn_position, random_force, "gold")
+			else:
+				spawn_duck(spawn_position, random_force, "rubber")
+			
 	
 
-func spawn_duck(position:Vector3, force:Vector3) -> void:
+func spawn_duck(position:Vector3, force:Vector3, type) -> void:
 	if duck_scene:
 		var duck_instance = duck_scene.instantiate()
 		duck_instance.position = spawn_position
 		
-		var rand = randf()
 		
-		if rand < 0.4:
+		if type == "rubber":
+			pass
+		else:
 			var new_model
 			var body = duck_instance.get_node("RigidBody3D")
 			var old_model = body.get_node("Model")
 			body.remove_child(old_model) 
 			old_model.queue_free()
 
-			
-			
-			if rand < 0.18:
-				if rand < 0.06:
-					new_model = gold_glb.instantiate()
-					body.duck_value = 10
-				else:
-					new_model = silver_glb.instantiate()
-					body.duck_value = 5 
-			else:
+			if type == "dynamite":
 				new_model = dynamite_glb.instantiate()
 				body.duck_value = -20 
 				body.is_dynamite = true
-				
-				
-				
-				
+			elif type == "silver":
+				new_model = silver_glb.instantiate()
+				body.duck_value = 5 
+			elif type == "gold":
+				new_model = gold_glb.instantiate()
+				body.duck_value = 10
+		
 				
 			new_model.name = "Model"
 			body.add_child(new_model)
