@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	if duck_instance:
 		duck_instance.rotate_y(2.0 * delta)
 
-	if not is_running:
+	if not is_running or not GameManager.gameActive:
 		return
 
 	time_left -= delta
@@ -38,10 +38,12 @@ func _process(delta: float) -> void:
 		GameManager.gameActive = false
 		update_label()
 		timer_finished.emit()
+		
 		await get_tree().create_timer(2.0).timeout
 		text = "Score: " + str(GameManager.score)
 		playagainlabel.show()
-		var position = Vector3(0.0, -1.25, 3.0)
+		
+		var spawn_pos = Vector3(0.0, -1.25, 3.0)
 		if GameManager.score < 20:
 			duck_instance = duck.instantiate()
 		elif GameManager.score < 60:
@@ -49,13 +51,12 @@ func _process(delta: float) -> void:
 		else:
 			duck_instance = duckgold.instantiate()
 
-		duck_instance.position = position
+		duck_instance.position = spawn_pos
 		duck_instance.scale = Vector3(1.7, 1.7, 1.7)
 		get_tree().current_scene.add_child(duck_instance)
 
 		font_size = 1300
 		modulate = finished_color
-
 		return
 
 	update_label()
