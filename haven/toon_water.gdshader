@@ -41,8 +41,15 @@ varying vec3 world_pos;
 
 uniform sampler2D depth_tex : hint_depth_texture, repeat_disable, filter_nearest;
 
+uniform vec4 impact_0 = vec4(0.0);
+uniform vec4 impact_1 = vec4(0.0);
+uniform vec4 impact_2 = vec4(0.0);
+uniform vec4 impact_3 = vec4(0.0);
 
-// VALUE NOISE
+uniform float ripple_speed = 1.8;
+uniform float ripple_width = 0.07;
+uniform float ripple_lifetime = 1.8;
+
 
 float hash21(vec2 p) {
     p = fract(p * vec2(123.34, 456.21));
@@ -127,6 +134,29 @@ void vertex() {
 }
 
 
+float calculate_ripple(vec2 uv, vec4 impact) {
+    if (impact.z < 0.0 || impact.z > ripple_lifetime) {
+        return 0.0;
+    }
+
+    float dist = distance(uv, impact.xy);
+
+    float radius = impact.z * ripple_speed;
+
+    float ring = 1.0 - smoothstep(
+        ripple_width * 0.5,
+        ripple_width,
+        abs(dist - radius)
+    );
+
+    float fade = 1.0 - smoothstep(
+        0.0,
+        ripple_lifetime,
+        impact.z
+    );
+
+    return ring * fade * impact.w;
+}
 
 void fragment() {
 
@@ -147,6 +177,10 @@ void fragment() {
     float depth_h = max(world_pos.y - scene_world.y, 0.0);
 
     vec2 uv = world_pos.xz;
+	
+	// WATER IMPACT RIPPLES
+
+
 
     float t = clamp(depth_h / max_depth, 0.0, 1.0);
 
@@ -169,7 +203,20 @@ void fragment() {
     col = mix(col, patch_color.rgb, blob * patch_strength);
 
 
+	float ripple = 0.0;
 
+	ripple += calculate_ripple(uv, impact_0);
+	ripple += calculate_ripple(uv, impact_1);
+	ripple += calculate_ripple(uv, impact_2);
+	ripple += calculate_ripple(uv, impact_3);
+
+	ripple = clamp(ripple, 0.0, 1.0);
+
+	col = mix(
+	    col,
+	    foam_color.rgb,
+	    ripple * 0.65
+	);
 
     vec2 p = uv * hex_scale;
 
