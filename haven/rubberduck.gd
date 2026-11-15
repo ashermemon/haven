@@ -15,7 +15,6 @@ func _ready() -> void:
 	if water_area:
 		water_area.body_entered.connect(_on_water_entered)
 
-	# Keep your existing launch code below
 	var random_rotation = Vector3(0.0, randf_range(-0.5, 0.5), 0.0)
 	apply_torque_impulse(random_rotation)
 
