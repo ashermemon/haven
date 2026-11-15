@@ -8,8 +8,39 @@
 [ext_resource type="Script" uid="uid://fcjltld84i7d" path="res://Crosshair.gd" id="5_7jktm"]
 [ext_resource type="Shader" uid="uid://djr7ij7616hgr" path="res://game.gdshader" id="5_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://cki312tkj55jj" path="res://hud.tscn" id="7_eow3j"]
+[ext_resource type="Shader" uid="uid://0p6o8010dbv6" path="res://toon_water.gdshader" id="8_vef74"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uuvgp"]
+render_priority = 1
+shader = ExtResource("8_vef74")
+shader_parameter/shallow_color = Color(0.52, 0.66, 0.95, 1)
+shader_parameter/deep_color = Color(0.4, 0.36, 1, 1)
+shader_parameter/patch_color = Color(0.04, 0.16, 0.66, 1)
+shader_parameter/line_color = Color(0.62, 0.96, 1, 1)
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_tint = Color(0.55, 0.42, 1, 1)
+shader_parameter/shallow_alpha = 0.85
+shader_parameter/water_alpha = 0.9
+shader_parameter/max_depth = 1.1
+shader_parameter/patch_scale = 0.35
+shader_parameter/patch_threshold = 0.5
+shader_parameter/patch_softness = 0.04
+shader_parameter/patch_strength = 0.8
+shader_parameter/cell_scale = 0.6
+shader_parameter/line_width = 0.1
+shader_parameter/cell_speed = 0.4
+shader_parameter/cell_warp = 0.35
+shader_parameter/line_strength = 0.9
+shader_parameter/foam_noise = 0.12
+shader_parameter/contact_foam_width = 0.06
+shader_parameter/sparkle_amount = 0.03
+shader_parameter/sparkle_scale = 12.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hve3p"]
+material = SubResource("ShaderMaterial_uuvgp")
+size = Vector2(100, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hve3p"]
 render_priority = 0
 shader = ExtResource("5_j5wjh")
 shader_parameter/saturation = 1.15
@@ -22,14 +53,14 @@ shader_parameter/highlight_tint = Color(1, 0.98, 0.85, 1)
 shader_parameter/tint_strength = 0.2
 
 [sub_resource type="QuadMesh" id="QuadMesh_uuvgp"]
-material = SubResource("ShaderMaterial_uuvgp")
+material = SubResource("ShaderMaterial_hve3p")
 flip_faces = true
 size = Vector2(2, 2)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
 sky_horizon_color = Color(0.5656549, 0.62510514, 0.6775485, 1)
-ground_bottom_color = Color(0.24637347, 0.15100378, 0.031082815, 1)
+ground_bottom_color = Color(0.029387133, 0.19192484, 0.27103645, 1)
 ground_horizon_color = Color(0.5656549, 0.62510514, 0.6775485, 1)
 
 [sub_resource type="Sky" id="Sky_feb5d"]
@@ -38,15 +69,19 @@ sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
 [sub_resource type="Environment" id="Environment_fc0e3"]
 background_mode = 2
 sky = SubResource("Sky_feb5d")
-ambient_light_source = 3
+ambient_light_source = 1
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.7
+ambient_light_energy = 0.5
 
 [node name="GameManager" type="Node3D" unique_id=220923442]
 script = ExtResource("1_eow3j")
 
+[node name="Water2" type="MeshInstance3D" parent="." unique_id=1044679275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+mesh = SubResource("PlaneMesh_hve3p")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648 node_paths=PackedStringArray("crosshair")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.4640007)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32004523, 5.4640007)
 script = ExtResource("3_fc0e3")
 crosshair = NodePath("../Crosshair")
 
@@ -59,13 +94,13 @@ mesh = SubResource("QuadMesh_uuvgp")
 environment = SubResource("Environment_fc0e3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=835676724]
-transform = Transform3D(0.8535534, 0.123173475, 0.5062361, -0.50000006, -0.079459414, 0.8623724, 0.14644663, -0.9891989, -0.006236114, 4, 8.355128, -0.027923107)
+transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 4, 20.121872, -0.027923107)
 light_color = Color(1, 0.94509804, 0.8392157, 1)
-light_energy = 1.6
-light_indirect_energy = 1.2
+light_indirect_energy = 0.27
 light_volumetric_fog_energy = 2.0
 light_specular = 0.3
 shadow_enabled = true
+directional_shadow_max_distance = 50.0
 
 [node name="Spawner" type="Node3D" parent="." unique_id=923238417]
 script = ExtResource("1_feb5d")
