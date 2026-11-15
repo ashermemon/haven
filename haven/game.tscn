@@ -229,3 +229,5 @@ font = ExtResource("14_7sc4i")
 font_size = 1800
 outline_size = 100
 script = ExtResource("14_215e1")
+warning_color = Color(1, 0.3928544, 0.32450747, 1)
+finished_color = Color(0.7921569, 0.85490197, 1, 1)

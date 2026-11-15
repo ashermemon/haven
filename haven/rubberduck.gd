@@ -11,6 +11,7 @@ var spawner
 
 func _ready() -> void:
 	var timer_label = get_tree().current_scene.find_child("Timer", true, false)
+	
 	timer_label.timer_finished.connect(_on_timer_finished)
 	
 	spawner = get_tree().current_scene.get_node("Spawner")
@@ -30,6 +31,7 @@ func _ready() -> void:
 
 func _on_timer_finished() -> void:
 	spawner.stop_spawning()
+	
 	explode()
 
 func _on_water_entered(body: Node3D) -> void:
@@ -256,6 +258,7 @@ func explode():
 	
 
 	await get_tree().create_timer(3).timeout
+	
 	queue_free()
 	pass
 

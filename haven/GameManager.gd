@@ -2,6 +2,7 @@ extends Node3D
 
 
 var score = 0
+var gameActive = true
 
 
 # Called when the node enters the scene tree for the first time.

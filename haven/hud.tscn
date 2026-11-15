@@ -3,6 +3,7 @@
 [ext_resource type="FontFile" uid="uid://djd7im83rtwf5" path="res://assets/fonts/Comic Kids.ttf" id="1_37p78"]
 [ext_resource type="Script" uid="uid://xlkf2okxvphx" path="res://hud.gd" id="1_64ctp"]
 [ext_resource type="Shader" uid="uid://cmpf4p4ffkw0m" path="res://toonshader.gdshader" id="3_8sq4i"]
+[ext_resource type="Script" uid="uid://lroyma7ki23i" path="res://play_again.gd" id="4_640wx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_640wx"]
 shader = ExtResource("3_8sq4i")
@@ -42,3 +43,27 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="PlayAgain" type="RichTextLabel" parent="." unique_id=84664315]
+clip_contents = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -976.0
+offset_top = -460.5
+offset_right = 976.0
+offset_bottom = -256.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/default_color = Color(0.89211607, 0.91675663, 0.8138564, 1)
+theme_override_colors/font_outline_color = Color(0.023371784, 0.023371786, 0.023371782, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/normal_font = ExtResource("1_37p78")
+theme_override_font_sizes/normal_font_size = 260
+bbcode_enabled = true
+text = "Play Again?"
+horizontal_alignment = 1
+vertical_alignment = 2
+script = ExtResource("4_640wx")

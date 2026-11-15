@@ -5,7 +5,10 @@ extends Camera3D
 
 func _process(_delta: float) -> void:
 	var mouse := get_viewport().get_mouse_position()
-	crosshair.global_position = project_position(mouse, distance)
+	if GameManager.gameActive:
+		crosshair.global_position = project_position(mouse, distance)
+	else:
+		crosshair.hide()
 
 		
 func shake_camera(intensity:float):
