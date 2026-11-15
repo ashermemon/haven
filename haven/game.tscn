@@ -153,7 +153,7 @@ gold_glb = ExtResource("6_iotsf")
 silver_glb = ExtResource("7_lc2xo")
 dynamite_glb = ExtResource("8_lc2xo")
 duck_freq = 0.5
-duck_accel = 0.005
+duck_accel = 0.01
 max_freq = 26.0
 
 [node name="Crosshair" parent="." unique_id=145224318 instance=ExtResource("3_feb5d")]

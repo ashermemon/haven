@@ -235,9 +235,7 @@ func smoke() -> void:
 	particles.emitting = true
 
 func explode():
-	if abletohit:
-		abletohit = false
-	else:
+	if not abletohit:
 		return
 		
 	freeze = true
