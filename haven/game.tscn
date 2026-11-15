@@ -13,6 +13,8 @@
 [ext_resource type="Shader" uid="uid://0p6o8010dbv6" path="res://toon_water.gdshader" id="8_vef74"]
 [ext_resource type="PackedScene" uid="uid://mmwqyddpoaxr" path="res://assets/models/BathTub.glb" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://cfjkec8pwl3qu" path="res://water_controller.gd" id="10_mfdv2"]
+[ext_resource type="FontFile" uid="uid://djd7im83rtwf5" path="res://assets/fonts/Comic Kids.ttf" id="14_7sc4i"]
+[ext_resource type="Script" uid="uid://dpkdn7vnuv0p4" path="res://timer.gd" id="14_215e1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
@@ -217,3 +219,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Water2/Water2" unique_id=1279647237]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4633217, 0)
 shape = SubResource("BoxShape3D_uuvgp")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1085393033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.4337654, -13.60476)
+billboard = 2
+modulate = Color(0.8562564, 0.8950538, 0.98973197, 1)
+text = "60"
+font = ExtResource("14_7sc4i")
+font_size = 1800
+outline_size = 100
+script = ExtResource("14_215e1")
