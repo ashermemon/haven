@@ -9,4 +9,6 @@ func _on_meta_clicked(meta: Variant) -> void:
 	print("Clicked meta: ", meta) 
 	if str(meta) == "PlayAgain":
 		get_tree().paused = false
+		GameManager.score = 0
 		get_tree().reload_current_scene()
+		
