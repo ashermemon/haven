@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dp5fm3a5e2w6q" path="res://GameManager.gd" id="1_eow3j"]
 [ext_resource type="Script" uid="uid://du2dhcl48wod5" path="res://DuckSpawner.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://boqvoafdo7vae" path="res://rubber_duck.tscn" id="2_e2o6t"]
+[ext_resource type="AudioStream" uid="uid://mvna6wdwc2p1" path="res://assets/audio/rubber.mp3" id="2_hb5m1"]
 [ext_resource type="Script" uid="uid://cl1amh4jlsrij" path="res://camera.gd" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bywk1p2nshxrp" path="res://assets/models/Crosshair.glb" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://fcjltld84i7d" path="res://Crosshair.gd" id="5_7jktm"]
@@ -20,6 +21,7 @@
 [ext_resource type="Script" uid="uid://dpkdn7vnuv0p4" path="res://timer.gd" id="14_215e1"]
 [ext_resource type="PackedScene" uid="uid://dsb0y1rnv7bhh" path="res://assets/models/RubberDuck.glb" id="16_80cx4"]
 [ext_resource type="AudioStream" uid="uid://rdde0sacoa88" path="res://assets/audio/shot.mp3" id="20_e36ub"]
+[ext_resource type="AudioStream" uid="uid://cmgpi0q1dpwr5" path="res://assets/audio/music.wav" id="22_x5p1p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
@@ -115,6 +117,18 @@ size = Vector3(50, 0.9272537, 50)
 
 [node name="GameManager" type="Node3D" unique_id=220923442]
 script = ExtResource("1_eow3j")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="." unique_id=1661963611]
+stream = ExtResource("2_hb5m1")
+volume_db = 3.0
+
+[node name="ShotSound" type="AudioStreamPlayer" parent="." unique_id=372097816]
+stream = ExtResource("20_e36ub")
+volume_db = -15.0
+
+[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="." unique_id=1902715930]
+volume_db = -3.0
+max_polyphony = 10
 
 [node name="BathTub" parent="." unique_id=616188069 instance=ExtResource("10_hve3p")]
 transform = Transform3D(-8.847186e-08, 0, -2.0240002, 0, 2.0240002, 0, 2.0240002, 0, -8.847186e-08, 0, -1, -1)
@@ -244,10 +258,7 @@ ducksilver = ExtResource("7_lc2xo")
 duckgold = ExtResource("6_iotsf")
 finished_color = Color(0.7921569, 0.85490197, 1, 1)
 
-[node name="ShotSound" type="AudioStreamPlayer3D" parent="." unique_id=1743107719]
-stream = ExtResource("20_e36ub")
-volume_db = 2.0
-max_polyphony = 10
-
-[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="." unique_id=1902715930]
-max_polyphony = 10
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=438761446]
+stream = ExtResource("22_x5p1p")
+volume_db = -5.0
+autoplay = true

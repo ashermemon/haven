@@ -8,6 +8,9 @@ var is_dynamite = false
 
 var water_controller: Node
 var spawner
+@onready var hit_sound: AudioStreamPlayer = get_tree().current_scene.get_node("HitSound")
+
+
 
 func _ready() -> void:
 	var timer_label = get_tree().current_scene.find_child("Timer", true, false)
@@ -275,6 +278,7 @@ func _on_input_event(camera: Node, event: InputEvent, event_position: Vector3, n
 			explode()
 		if abletohit:
 			abletohit = false
+			hit_sound.play()
 			hud.add_score(duck_value)
 			await get_tree().create_timer(3.0).timeout
 			queue_free()
