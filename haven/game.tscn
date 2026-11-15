@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://cl1amh4jlsrij" path="res://camera.gd" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bywk1p2nshxrp" path="res://assets/models/Crosshair.glb" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://fcjltld84i7d" path="res://Crosshair.gd" id="5_7jktm"]
-[ext_resource type="Shader" uid="uid://djr7ij7616hgr" path="res://game.gdshader" id="5_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://cki312tkj55jj" path="res://hud.tscn" id="7_eow3j"]
 [ext_resource type="Shader" uid="uid://0p6o8010dbv6" path="res://toon_water.gdshader" id="8_vef74"]
 [ext_resource type="PackedScene" uid="uid://mmwqyddpoaxr" path="res://assets/models/BathTub.glb" id="10_hve3p"]
@@ -41,23 +40,6 @@ shader_parameter/sparkle_scale = 1.0
 material = SubResource("ShaderMaterial_uuvgp")
 size = Vector2(50, 50)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hve3p"]
-render_priority = 0
-shader = ExtResource("5_j5wjh")
-shader_parameter/saturation = 1.15
-shader_parameter/contrast = 1.12
-shader_parameter/brightness = 1.05
-shader_parameter/color_levels = 5.0
-shader_parameter/toon_strength = 0.65
-shader_parameter/shadow_tint = Color(0.75, 0.83, 1, 1)
-shader_parameter/highlight_tint = Color(1, 0.98, 0.85, 1)
-shader_parameter/tint_strength = 0.2
-
-[sub_resource type="QuadMesh" id="QuadMesh_uuvgp"]
-material = SubResource("ShaderMaterial_hve3p")
-flip_faces = true
-size = Vector2(2, 2)
-
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
 sky_horizon_color = Color(0.5656549, 0.62510514, 0.6775485, 1)
@@ -70,12 +52,16 @@ sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
 [sub_resource type="Environment" id="Environment_fc0e3"]
 background_mode = 2
 sky = SubResource("Sky_feb5d")
-ambient_light_source = 1
+ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.5
+ambient_light_energy = 1.5
+tonemap_exposure = 0.9
 
 [node name="GameManager" type="Node3D" unique_id=220923442]
 script = ExtResource("1_eow3j")
+
+[node name="BathTub" parent="." unique_id=616188069 instance=ExtResource("10_hve3p")]
+transform = Transform3D(-8.847186e-08, 0, -2.0240002, 0, 2.0240002, 0, 2.0240002, 0, -8.847186e-08, 0, -1, -1)
 
 [node name="Water2" type="MeshInstance3D" parent="." unique_id=1044679275]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
@@ -86,20 +72,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 5.464)
 script = ExtResource("3_fc0e3")
 crosshair = NodePath("../Crosshair")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=902763051]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_uuvgp")
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1821137143]
 environment = SubResource("Environment_fc0e3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=835676724]
 transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 4, 20.121872, -0.027923107)
-light_color = Color(1, 0.94509804, 0.8392157, 1)
-light_indirect_energy = 0.27
-light_volumetric_fog_energy = 2.0
+light_energy = 0.6
+light_indirect_energy = 1.434
+light_volumetric_fog_energy = 1.515
+light_angular_distance = 9.2
 light_specular = 0.3
+light_bake_mode = 1
+shadow_enabled = true
+directional_shadow_max_distance = 50.0
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1025043090]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -10, 0)
+light_color = Color(0.8206829, 0.8664971, 0.99999815, 1)
+light_energy = 0.05
+light_indirect_energy = 1.434
+light_volumetric_fog_energy = 1.515
+light_angular_distance = 9.2
+light_specular = 0.3
+light_bake_mode = 1
 shadow_enabled = true
 directional_shadow_max_distance = 50.0
 
@@ -113,6 +108,3 @@ transform = Transform3D(3.8636622e-10, 0, -0.032400005, 0, 0.032400005, 0, 0.032
 script = ExtResource("5_7jktm")
 
 [node name="HUD" parent="." unique_id=1120462307 instance=ExtResource("7_eow3j")]
-
-[node name="BathTub" parent="." unique_id=616188069 instance=ExtResource("10_hve3p")]
-transform = Transform3D(-8.847186e-08, 0, -2.0240002, 0, 2.0240002, 0, 2.0240002, 0, -8.847186e-08, 0, -1, -1)
