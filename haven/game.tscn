@@ -6,7 +6,25 @@
 [ext_resource type="Script" uid="uid://cl1amh4jlsrij" path="res://camera.gd" id="3_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bywk1p2nshxrp" path="res://assets/models/Crosshair.glb" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://fcjltld84i7d" path="res://Crosshair.gd" id="5_7jktm"]
+[ext_resource type="Shader" uid="uid://djr7ij7616hgr" path="res://game.gdshader" id="5_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://cki312tkj55jj" path="res://hud.tscn" id="7_eow3j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uuvgp"]
+render_priority = 0
+shader = ExtResource("5_j5wjh")
+shader_parameter/saturation = 1.15
+shader_parameter/contrast = 1.12
+shader_parameter/brightness = 1.05
+shader_parameter/color_levels = 5.0
+shader_parameter/toon_strength = 0.65
+shader_parameter/shadow_tint = Color(0.75, 0.83, 1, 1)
+shader_parameter/highlight_tint = Color(1, 0.98, 0.85, 1)
+shader_parameter/tint_strength = 0.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_uuvgp"]
+material = SubResource("ShaderMaterial_uuvgp")
+flip_faces = true
+size = Vector2(2, 2)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
@@ -20,28 +38,39 @@ sky_material = SubResource("ProceduralSkyMaterial_e2o6t")
 [sub_resource type="Environment" id="Environment_fc0e3"]
 background_mode = 2
 sky = SubResource("Sky_feb5d")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.7
 
 [node name="GameManager" type="Node3D" unique_id=220923442]
 script = ExtResource("1_eow3j")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648 node_paths=PackedStringArray("crosshair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.4640007)
+script = ExtResource("3_fc0e3")
+crosshair = NodePath("../Crosshair")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D" unique_id=902763051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_uuvgp")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1821137143]
 environment = SubResource("Environment_fc0e3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=835676724]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-light_color = Color(0.9882353, 0.6431373, 0.050980393, 1)
-light_energy = 1.5
+transform = Transform3D(0.8535534, 0.123173475, 0.5062361, -0.50000006, -0.079459414, 0.8623724, 0.14644663, -0.9891989, -0.006236114, 4, 8.355128, -0.027923107)
+light_color = Color(1, 0.94509804, 0.8392157, 1)
+light_energy = 1.6
+light_indirect_energy = 1.2
+light_volumetric_fog_energy = 2.0
+light_specular = 0.3
 shadow_enabled = true
 
 [node name="Spawner" type="Node3D" parent="." unique_id=923238417]
 script = ExtResource("1_feb5d")
 duck_scene = ExtResource("2_e2o6t")
 duck_accel = 0.005
-
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1466842648 node_paths=PackedStringArray("crosshair")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.4640007)
-script = ExtResource("3_fc0e3")
-crosshair = NodePath("../Crosshair")
 
 [node name="Crosshair" parent="." unique_id=145224318 instance=ExtResource("3_feb5d")]
 transform = Transform3D(3.8636622e-10, 0, -0.032400005, 0, 0.032400005, 0, 0.032400005, 0, 3.8636622e-10, 0, 0, 3.9)

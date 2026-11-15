@@ -1,7 +1,6 @@
 extends RigidBody3D
 
 var duck_value = 5
-@onready var camera = $Camera3D
 @onready var hud = get_tree().current_scene.get_node("HUD")
 
 var abletohit:= true
