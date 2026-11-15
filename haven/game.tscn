@@ -144,7 +144,9 @@ directional_shadow_max_distance = 50.0
 [node name="Spawner" type="Node3D" parent="." unique_id=923238417]
 script = ExtResource("1_feb5d")
 duck_scene = ExtResource("2_e2o6t")
+duck_freq = 0.5
 duck_accel = 0.005
+max_freq = 26.0
 
 [node name="Crosshair" parent="." unique_id=145224318 instance=ExtResource("3_feb5d")]
 transform = Transform3D(3.8636622e-10, 0, -0.032400005, 0, 0.032400005, 0, 0.032400005, 0, 3.8636622e-10, 0, 0, 3.9)

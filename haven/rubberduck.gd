@@ -2,7 +2,7 @@ extends RigidBody3D
 
 var duck_value = 5
 @onready var hud = get_tree().current_scene.get_node("HUD")
-
+var hitcount = 0
 var abletohit:= true
 
 var water_controller: Node
@@ -26,16 +26,23 @@ func _on_water_entered(body: Node3D) -> void:
 	if body != self:
 		return
 
-	print("DUCK ENTERED WATER!")
+	
 
 	var impact_strength = clampf(linear_velocity.length() / 6.0, 0.35, 1.5)
 
 	if water_controller == null:
-		print("ERROR: WATER CONTROLLER NOT FOUND")
 		return
 
-	print("TRIGGERING SPLASH!")
 	water_controller.splash(global_position, impact_strength)
+	hitcount+=1
+	if randf() < ((0.9 /hitcount)*2) && hitcount >= 2 && abletohit:
+
+		var ran_spin = Vector3(randf_range(-0.05, 0.05), randf_range(-0.05, 0.05), randf_range(-0.05, 0.05))
+		apply_torque_impulse(ran_spin * 15.0)
+		
+		var impulse_force = Vector3(randf_range(-1, 1), randf_range(10, 16), 0.0)
+		apply_central_impulse(impulse_force)
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
