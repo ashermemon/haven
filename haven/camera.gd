@@ -7,7 +7,9 @@ func _process(_delta: float) -> void:
 	var mouse := get_viewport().get_mouse_position()
 	if GameManager.gameActive:
 		crosshair.global_position = project_position(mouse, distance)
+		Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
 	else:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		crosshair.hide()
 
 		

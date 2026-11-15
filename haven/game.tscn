@@ -11,11 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://djl225fwx11ux" path="res://assets/models/SilverDuck.glb" id="7_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://cjapa5kf0bet3" path="res://assets/models/Dynamite.glb" id="8_lc2xo"]
 [ext_resource type="Shader" uid="uid://0p6o8010dbv6" path="res://toon_water.gdshader" id="8_vef74"]
+[ext_resource type="AudioStream" uid="uid://bb8yaj4qdw5oe" path="res://assets/audio/quack.mp3" id="9_boyg6"]
+[ext_resource type="AudioStream" uid="uid://mfeg31efyeun" path="res://assets/audio/goldquack.mp3" id="10_e36ub"]
 [ext_resource type="PackedScene" uid="uid://mmwqyddpoaxr" path="res://assets/models/BathTub.glb" id="10_hve3p"]
 [ext_resource type="Script" uid="uid://cfjkec8pwl3qu" path="res://water_controller.gd" id="10_mfdv2"]
+[ext_resource type="AudioStream" uid="uid://bfukya14o24kx" path="res://assets/audio/sizzle.mp3" id="11_hb5m1"]
 [ext_resource type="FontFile" uid="uid://djd7im83rtwf5" path="res://assets/fonts/Comic Kids.ttf" id="14_7sc4i"]
 [ext_resource type="Script" uid="uid://dpkdn7vnuv0p4" path="res://timer.gd" id="14_215e1"]
 [ext_resource type="PackedScene" uid="uid://dsb0y1rnv7bhh" path="res://assets/models/RubberDuck.glb" id="16_80cx4"]
+[ext_resource type="AudioStream" uid="uid://rdde0sacoa88" path="res://assets/audio/shot.mp3" id="20_e36ub"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e2o6t"]
 sky_top_color = Color(0.120128445, 0.45329928, 0.78299356, 1)
@@ -156,6 +160,10 @@ dynamite_glb = ExtResource("8_lc2xo")
 duck_freq = 0.5
 duck_accel = 0.01
 max_freq = 26.0
+rubber_sfx = ExtResource("9_boyg6")
+silver_sfx = ExtResource("9_boyg6")
+gold_sfx = ExtResource("10_e36ub")
+dynamite_sfx = ExtResource("11_hb5m1")
 
 [node name="Crosshair" parent="." unique_id=145224318 instance=ExtResource("3_feb5d")]
 transform = Transform3D(3.8636622e-10, 0, -0.032400005, 0, 0.032400005, 0, 0.032400005, 0, 3.8636622e-10, 0, 0, 3.9)
@@ -235,3 +243,11 @@ duck = ExtResource("16_80cx4")
 ducksilver = ExtResource("7_lc2xo")
 duckgold = ExtResource("6_iotsf")
 finished_color = Color(0.7921569, 0.85490197, 1, 1)
+
+[node name="ShotSound" type="AudioStreamPlayer3D" parent="." unique_id=1743107719]
+stream = ExtResource("20_e36ub")
+volume_db = 2.0
+max_polyphony = 10
+
+[node name="SpawnSFX" type="AudioStreamPlayer3D" parent="." unique_id=1902715930]
+max_polyphony = 10

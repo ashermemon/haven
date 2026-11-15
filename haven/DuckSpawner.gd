@@ -13,7 +13,14 @@ var spawn_position:Vector3
 @export var duck_accel := 0.1 #per sec
 @export var max_freq := 20.0
 
+@export var rubber_sfx: AudioStream
+@export var silver_sfx: AudioStream
+@export var gold_sfx: AudioStream
+@export var dynamite_sfx: AudioStream
+
 var enabled = true
+
+@onready var spawn_sfx: AudioStreamPlayer3D = $"../SpawnSFX"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,6 +63,7 @@ func spawn_duck(position:Vector3, force:Vector3, type) -> void:
 		
 		
 		if type == "rubber":
+			play_spawn_sound(rubber_sfx)
 			pass
 		else:
 			var new_model
@@ -65,13 +73,16 @@ func spawn_duck(position:Vector3, force:Vector3, type) -> void:
 			old_model.queue_free()
 
 			if type == "dynamite":
+				play_spawn_sound(dynamite_sfx)
 				new_model = dynamite_glb.instantiate()
 				body.duck_value = -20 
 				body.is_dynamite = true
 			elif type == "silver":
+				play_spawn_sound(silver_sfx)
 				new_model = silver_glb.instantiate()
 				body.duck_value = 5 
 			elif type == "gold":
+				play_spawn_sound(gold_sfx)
 				new_model = gold_glb.instantiate()
 				body.duck_value = 10
 		
@@ -82,3 +93,10 @@ func spawn_duck(position:Vector3, force:Vector3, type) -> void:
 		
 		
 		add_child(duck_instance)
+
+
+func play_spawn_sound(sound: AudioStream) -> void:
+	if sound and spawn_sfx:
+		spawn_sfx.position = spawn_position
+		spawn_sfx.stream = sound
+		spawn_sfx.play()
