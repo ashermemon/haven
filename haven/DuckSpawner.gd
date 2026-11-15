@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 	time_since_spawn += delta
 	if time_since_spawn >= spawn_interval:
 		
-		spawn_position = Vector3(randf_range(-5.0, 5.0), -5.0, randf_range(0.0, 1.0))
+		spawn_position = Vector3(randf_range(-5.0, 5.0), -5.0, randf_range(-0.5, 0.5))
 		
 		time_since_spawn -= spawn_interval
 		spawn_duck(spawn_position, random_force)
